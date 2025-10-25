@@ -18,15 +18,12 @@ client_front = openai.OpenAI(api_key=api_key)
 
 response_front = client_front.responses.create(
     model="gpt-5",  # or "gpt-4.1" / "gpt-4o-mini"
-    input=f"Extract task, time, and content from: \"{user_input}\"",
+    input=f"Extract origin, destination, and date from: \"{user_input}\"",
     max_output_tokens=50,
     temperature=0.5,
 )
 
 print(response_front.output_text)
-
-
-
 
 
 
