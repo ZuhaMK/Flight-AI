@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Flight Chat UI Scaffold</title>
-    <link rel="stylesheet" href="transfiguration.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='transfiguration.css') }}">
 </head>
 <body>
 <div class="app">
@@ -69,6 +69,6 @@
         </section>
     </main>
 </div>
-<script src="enchantments.js"></script>
+<script src="{{ url_for('static', filename='enchantments.js') }}"></script>
 </body>
 </html>
