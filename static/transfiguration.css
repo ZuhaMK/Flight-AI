@@ -1,112 +1,165 @@
-/* --- 기본 리셋 & 팔레트 --- */
-*, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #1f2937; }
-:root{
+/* === 기본 설정 및 색상 === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #1f2937;
+    background-color: #f7f7fb;
+}
+
+:root {
     --bg: #f7f7fb;
     --panel: #ffffff;
     --line: #e5e7eb;
     --brand: #2563eb;
 }
 
-/* --- 전체 레이아웃: 상단바 + 본문 2열 --- */
+/* === 전체 레이아웃 === */
 .app {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 56px 1fr;        /* 상단바 높이 + 콘텐츠 */
-    background: var(--bg);
+    grid-template-rows: 56px 1fr;
+    background-color: var(--bg);
 }
 
-/* 상단 네비게이션 바 */
-.navbar{
+/* === 상단 네비게이션 바 === */
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
     border-bottom: 1px solid var(--line);
-    background: var(--panel);
-    position: sticky; top: 0; z-index: 10;
+    background-color: var(--panel);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
-.nav-title{ font-weight: 700; letter-spacing: .5px; }
-.profile{
-    width: 32px; height: 32px; border-radius: 50%;
+
+.nav-title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     background: linear-gradient(135deg, var(--brand), #9333ea);
 }
 
-/* 본문: 좌측 챗 / 우측 항공편 */
-.content{
+/* === 본문: 좌측 챗 / 우측 항공편 (반반) === */
+.content {
     display: grid;
-    grid-template-columns: 320px 1fr;    /* 좌측 폭 고정, 우측 가변 */
+    grid-template-columns: 1fr 1fr; /* 반반 나누기 */
     gap: 16px;
     padding: 16px;
-    height: calc(100vh - 56px);          /* 상단바 제외한 높이 */
+    height: calc(100vh - 56px);
 }
 
-/* --- 좌측: 챗 영역 --- */
-.chat{
-    display: grid;
-    grid-template-rows: auto 1fr auto;   /* 헤더 / 로그 / 입력 */
-    background: var(--panel);
-    border: 1px solid var(--line);
+/* === 공통 박스 스타일 === */
+.chat, .flights {
+    width: 100%;
     border-radius: 12px;
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    display: grid;
     overflow: hidden;
 }
-.chat-header{
+
+/* === 좌측: 챗 영역 === */
+.chat {
+    grid-template-rows: auto 1fr auto;
+}
+
+.chat-header {
     padding: 12px 14px;
     border-bottom: 1px solid var(--line);
     font-weight: 600;
 }
-.chat-log{
+
+.chat-log {
     padding: 12px 14px;
-    overflow-y: auto;                    /* 로그 스크롤 */
+    overflow-y: auto;
 }
-.chat-input{
+
+.chat-input {
     border-top: 1px solid var(--line);
     padding: 10px;
-    background: #fafafa;
-    display: flex; gap: 8px;
-}
-.chat-input input{
-    flex: 1; padding: 10px 12px; border: 1px solid var(--line);
-    border-radius: 8px; outline: none;
-}
-.chat-input button{
-    padding: 10px 14px; border: none; border-radius: 8px;
-    background: var(--brand); color: #fff; cursor: pointer;
+    background-color: #fafafa;
+    display: flex;
+    gap: 8px;
 }
 
-/* --- 우측: 항공편 리스트(세로 스크롤 가능) --- */
-.flights{
-    display: grid;
-    grid-template-rows: auto 1fr;
-    background: var(--panel);
+.chat-input input {
+    flex: 1;
+    padding: 10px 12px;
     border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
+    border-radius: 8px;
+    outline: none;
 }
-.flights-header{
+
+.chat-input button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--brand);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.chat-input button:hover {
+    background-color: #1e40af;
+}
+
+/* === 우측: 항공편 리스트 === */
+.flights {
+    grid-template-rows: auto 1fr;
+}
+
+.flights-header {
     padding: 12px 14px;
     border-bottom: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-weight: 600;
 }
-.flight-list{
-    overflow-y: auto;    /* ✅ 우측 컬럼만 독립 스크롤 */
+
+.flight-list {
+    overflow-y: auto;
     padding: 14px;
     display: grid;
     gap: 12px;
 }
-.flight-card{
+
+.flight-card {
     border: 1px solid var(--line);
     border-radius: 10px;
     padding: 12px;
+    background-color: #fff;
+    transition: background-color 0.2s ease;
 }
-.meta{ color:#6b7280; font-size: 12px; }
 
-/* --- 반응형(좁은 화면은 상하 배치) --- */
-@media (max-width: 900px){
-    .content{
+.flight-card:hover {
+    background-color: #f3f4f6;
+}
+
+.meta {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* === 반응형 (모바일) === */
+@media screen and (max-width: 900px) {
+    .content {
         grid-template-columns: 1fr;
-        grid-template-rows: 360px 1fr;     /* 위: 챗, 아래: 항공편 */
+        grid-template-rows: 360px 1fr;
         height: auto;
     }
 }
