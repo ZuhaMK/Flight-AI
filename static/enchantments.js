@@ -14,6 +14,7 @@ async function sendMessage() {
             body: JSON.stringify({message})
         });
         const data = await response.json();
+        let editor = data.reply;
         chatbox.innerHTML += `<p><strong>AI:</strong> ${data.reply}</p>`;
     }
 }
